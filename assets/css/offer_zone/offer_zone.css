@@ -1,0 +1,15 @@
+    
+ 
+      #color_code {
+      width: 31px ;
+      height: 100% ;
+      margin: -14px;
+    }
+    #color_code {
+        background: transparent;
+        border: none;
+        width: 31px  !important;
+        height: 100% !important;
+        border-radius: 50%;
+        margin: -14px;
+    }

@@ -1,0 +1,10 @@
+.header-top {
+    background: #f28d9f;
+    color: white;
+}
+.ec-header-bottom.d-none.d-lg-block {
+    background: #ffe0e6;
+}
+#ec-main-menu-desk {
+    background: #ffe0e6;
+}

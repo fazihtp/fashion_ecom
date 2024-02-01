@@ -1,0 +1,24 @@
+.active-button {
+  display: block;
+  background: green;
+  max-width: 50%;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+}
+.warning-button {
+  display: block;
+  background: orange;
+  max-width: 50%;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+}
+.deactivate-button {
+  display: block;
+  background: red;
+  max-width: 50%;
+  text-align: center;
+  color: white;
+  border-radius: 5px;
+}
