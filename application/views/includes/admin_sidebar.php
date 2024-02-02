@@ -99,15 +99,15 @@
 										</a>
 									</li>
 									<li class="">
-										<a class="sidenav-item-link" href="<?php echo base_url();?>Orders/PrintedOrders">
-										    	<?php $printed_count = getOrderPrintedDetails() ?>
-											<span class="nav-text">Shipped Orders <b> <?php echo $printed_count ?></b></span>
+										<a class="sidenav-item-link" href="<?php echo base_url();?>Orders/deliveredOrders">
+										    	<?php $delivered_count = getOrderDeliveredDetails() ?>
+											<span class="nav-text">Shipped Orders <b> <?php echo $delivered_count ?></b></span>
 										</a>
 									</li>
 									
 								</ul>
 							</div>
-						</li>
+			</li>
 						<li class="has-sub">
 							<a class="sidenav-item-link" href="javascript:void(0)">
 								<i class="mdi mdi-settings"></i>

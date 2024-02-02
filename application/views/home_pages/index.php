@@ -378,47 +378,6 @@
     </section>
     <!-- New Product end -->
 
-    <!-- review ofthe client -->
-    <section class="section ec-test-section section-space-ptb-100 section-space-m" id="reviews">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <div class="section-title mb-0">
-                        <h2 class="ec-bg-title">Testimonial</h2>
-                        <h2 class="ec-title">Client Review</h2>
-                        <p class="sub-title mb-3">What say client about us</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="ec-test-outer">
-                    <ul id="ec-testimonial-slider">
-                          <?php foreach ($review as $rev) { ?>
-                        <li class="ec-test-item"> 
-                            <i class="fi-rr-quote-right top"></i>
-                            <div class="ec-test-inner">
-                                <div class="ec-test-img">
-                                       <img alt="testimonial" title="testimonial" src="<?php echo base_url('assets/uploads/client_image') .'/'. $rev->image; ?>">
-                                 </div>
-                                 <div class="ec-test-content">
-                                        <div class="ec-test-desc"><?php echo $rev->discription ?></div>
-                                        <div class="ec-test-name"><?php echo $rev->client_name ?></div>
-                                        <!--<div class="ec-test-designation">General Manager</div>-->
-                                        <div class="ec-test-rating">
-                                            <?php for ($i = 1; $i <= $rev->rating; $i++) { ?>
-                                                <i class="ecicon eci-star fill"></i>
-                                            <?php } ?>
-                                        </div>
-                                    </div>
-                                 </div>
-                             <i class="fi-rr-quote-right bottom"></i>
-                         </li>
-                            <?php } ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
     
 <?php echo $this->load->view('includes/footer.php','',TRUE);?>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

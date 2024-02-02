@@ -288,20 +288,28 @@ public function getMemberDetailsbyId($id)
     	
 		
 		public function getorderProducts($id){
-        $this->db->select('tbl_orders.id as order_id,tbl_orders.user_id,tbl_orders.order_status,tbl_order_products.product_id,tbl_order_products.colour_id,tbl_order_products.size_id,tbl_products.product_name,tbl_products_gallery.image,tbl_order_products.id,tbl_orders.total_amount,tbl_orders.order_status,tbl_orders.created_at,tbl_colours.id,tbl_colours.colors,tbl_size.id,tbl_size.size');
+        $this->db->select('tbl_orders.id as order_id,tbl_orders.user_id,tbl_orders.order_status,tbl_order_products.product_id,tbl_products.product_name,tbl_products_gallery.image,tbl_order_products.id,tbl_orders.total_amount,tbl_orders.order_status,tbl_orders.created_at');
          $this->db->from('tbl_order_products');
        $this->db->join('tbl_orders','tbl_orders.id = tbl_order_products.order_id');
-       $this->db->join('tbl_colours','tbl_colours.id = tbl_order_products.colour_id ');
-        $this->db->join('tbl_size','tbl_size.id = tbl_order_products.size_id ');
       	$this->db->join('tbl_products', 'tbl_products.id = tbl_order_products.product_id');
       	$this->db->join('tbl_products_gallery ', 'tbl_products_gallery.product_id = tbl_order_products.product_id');
 		$this->db->where('tbl_orders.user_id', $id);
 		$this->db->where('tbl_orders.payment_status', 'PAID');
 		$this->db->where('tbl_orders.is_deleted', 'N');
 		$this->db->order_by('tbl_orders.id', 'desc');
-// 		$this->db->group_by('tbl_order_products.id');
+		$this->db->group_by('tbl_order_products.id');
         return $this->db->get()->result();
      }
+     public function getsize(){
+        $this->db->where('status',1);
+        $result = $this->db->get('tbl_size')->result();
+        return $result;
+    }
+    public function getColours(){
+        $this->db->where('status',1);
+        $result = $this->db->get('tbl_colours')->result();
+        return $result;
+    }  
      	public function getcountorder($id)
 		{
 			$this->db->where('user_id',$id);

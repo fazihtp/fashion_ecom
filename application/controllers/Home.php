@@ -15,12 +15,9 @@ class Home extends CI_Controller {
 	}
 	public function index()
 	{
-        
-	     $data['product'] = $this->HomeModel->getproducts();
+        $data['product'] = $this->HomeModel->getproducts();
 	     $data['new_product'] = $this->HomeModel->newproducts();
-	   //  $data['count'] = $this->HomeModel->getcount();
-	     $data['review'] = $this->HomeModel->getreview();
-	     $data['banner'] = $this->HomeModel->getBanner();
+         $data['banner'] = $this->HomeModel->getBanner();
         //  $data['category'] = $this->HomeModel->getcategory();
 	    $data['categories']= $this->HomeModel->getCategoriesList();
 		$this->load->view('home_pages/index',$data);
@@ -55,8 +52,7 @@ class Home extends CI_Controller {
 	public function about_us()
 	{
 	    $data['categories']= get_categories();
-	     $data['review'] = $this->HomeModel->getreview();
-		$this->load->view('home_pages/about_us',$data);
+        $this->load->view('home_pages/about_us',$data);
 	}
 	public function contact_us()
 	{
@@ -68,52 +64,50 @@ class Home extends CI_Controller {
 	    
 		$this->load->view('home_pages/enquiry_template',$data);
 	}
-    public function sendMail()
+ 
+
+    	public function sendMail()
     {
-        $this->load->library('email');
+    $this->load->library('email');
     
-        // Email configuration for Gmail SMTP
-        $config = array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.gmail.com',
-            'smtp_port' => 465,
-            'smtp_user' => 'fazih.login2@gmail.com', 
-            'smtp_pass' => 'Kl58u0822=', 
-            'mailtype' => 'html',
-            'charset' => 'utf-8',
-            'newline' => "\r\n"
-        );
-    
-        $this->email->initialize($config);
-    
-        // Email content
-        $details['user_name'] = $this->input->post('firstname') . ' ' . $this->input->post('lastname');
-        $details['user_email'] = $this->input->post('email');
-        $details['user_phone'] = $this->input->post('phonenumber');
-        $details['user_subject'] = $this->input->post('address');
-        $details['enquiry_mail'] = $this->input->post('enquiry_mail');
-    
-        $to = "sales@hakcollectioms.com";
-        $subject = 'ENQUIRY';
-        $message = $this->load->view('home_pages/enquiry_template', $details, true);
-    
-        $from = $this->input->post('email'); 
-        $this->email->from($from);
-        $this->email->to($to);
-        $this->email->subject($subject);
-        $this->email->message($message);
-    
-        // Send email
-        if ($this->email->send()) {
-            $this->session->set_flashdata('flashSuccess', 'We will contact you soon!');
-            redirect(base_url().'home/index');
-        } else {
-            // Display email error if any
-            show_error($this->email->print_debugger());
-            // Or set flash data for error message
-            $this->session->set_flashdata('flashError', 'Something went wrong!');
-            redirect(base_url().'home/index');
-        }
+    $details['user_name'] = $this->input->post('firstname') . ' ' . $this->input->post('lastname');
+    $details['user_email'] = $this->input->post('email');
+    $details['user_phone'] = $this->input->post('phonenumber');
+    $details['user_subject'] = $this->input->post('address');
+    $details['enquiry_mail'] = $this->input->post('enquiry_mail');
+    $to = "fazih.login2@gmail.com";
+
+    $config = Array(
+        'protocol' => 'smtp',
+        'smtp_host' => 'ssl://smtp.zoho.com',
+        'smtp_port' => 465,
+        'smtp_user' => 'info@login2.co.in',
+        'smtp_pass' => 'Teamlogin2@#',
+        'mailtype'  => 'html',
+        'charset'   => 'iso-8859-1'
+    );
+
+  
+    $this->email->initialize($config);
+    $this->email->set_newline("\r\n");
+    $subject = 'ENQUIRY';
+    $message = $this->load->view('home_pages/enquiry_template',$details, true);
+    $from = "info@login2.co.in";
+    $this->email->from($from);
+    $this->email->to($to);
+    $this->email->subject($subject);
+    $this->email->message($message);
+
+    $mail = $this->email->send();
+        if($mail){
+			$this->session->set_flashdata('flashSuccess','We will contact you soon!');
+			redirect(base_url().'home/index');
+        }else{
+                 show_error($this->email->print_debugger());
+
+	//	$this->session->set_flashdata('flashError','Something went wrong!');
+			redirect(base_url().'home/index');
+		}
     }
     
     
@@ -163,7 +157,8 @@ class Home extends CI_Controller {
             $this->session->set_userdata('role_id', 2);
 			$this->session->set_userdata('user_id', $post_user->id);
 			$this->session->set_userdata('signed_in', TRUE);
-			redirect(base_url() .'Home/index');
+            $this->session->set_flashdata('flashSuccess','Registration Success!');
+			redirect(base_url() .'User/dashboard');
         }
     }
 
@@ -212,7 +207,7 @@ class Home extends CI_Controller {
               }
               else
               {
-                  $this->session->set_flashdata('flashError','Something went wrong!');
+                  $this->session->set_flashdata('flashError','Username or Password incorrrect!');
 				  redirect('Home');
               }
          }

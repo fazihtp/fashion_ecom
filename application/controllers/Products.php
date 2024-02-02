@@ -19,8 +19,6 @@ class Products extends CI_Controller {
 	{   
 	    $this->load->model('AdminModel');
 	    $data['categories'] = $this->ProductsModel->getCategories();
-        $data['size']       = $this->ProductsModel->getsize();
-        $data['colours']    = $this->ProductsModel->getColours();
         $this->load->view('admin/products/add_products',$data);
 	}
    	public function get_sub_category_list(){

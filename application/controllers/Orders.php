@@ -56,7 +56,7 @@ class Orders extends CI_Controller {
 			$btn .= "<a href='" . base_url('Orders/viewOrders/'. $vend->id) . "' target='_blank' class='edit-item-btn'><i class='fas fa-eye' style='font-size: 24px;'></i></a>&nbsp;&nbsp";
 // 			$btn		 .=	  "<a target='_blank' href='" . base_url('Orders/changeToProce/' .$vend->id) . "' class='='btn btn-soft-warning'><i class='fas fa-check-circle' style='font-size: 24px;'></i></a>&nbsp";
 			$btn		 .=	  "<a data-bs-toggle='modal' data-bs-target='#approvedModal' onclick='change_status(".$vend->id.")'  class='edit-item-btn'><i class='fas fa-check-circle' style='font-size: 24px;'></i></a>&nbsp";
-			$btn		 .=	  "<a target='_blank' href='" . base_url('Orders/generatePdf/' .$vend->id) . "' class='='btn btn-soft-warning'><i class='fas fa-print' style='font-size: 24px;color:#EEC900'></i></a>&nbsp";
+			
 		
 			
 		    $btn		 .=	  "<a data-bs-target='#deleteRecordModal' data-bs-toggle='modal' onclick='delete_order(".$vend->id.")' class='='btn btn-soft-danger'><i class='fa fa-trash-o' style='font-size: 20px;color:#f06548'></i></a>";
@@ -177,10 +177,10 @@ public function viewOrders($order_id){
 	}
 
 
-  public function ChangeToPrint(){
+  public function ChangeToDeliver(){
     // 	$member=$id;
         $id = $this->input->post('order_id');
-		$data=$this->OrdersModel->ChangeToPrint($id);
+		$data=$this->OrdersModel->ChangeToDeliver($id);
 		if ($data) {
             $this->session->set_flashdata('flashSuccess', 'Procecced ');
             	redirect($_SERVER['HTTP_REFERER']);
@@ -258,14 +258,14 @@ public function viewOrders($order_id){
        
 
     
-  	public function PrintedOrders(){
+  	public function deliveredOrders(){
  	    
 	    $this->load->view('admin/orders/printed_orders');
 	}
-        function getPrintedOrderList()
+        function getDelivered()
     {
 		$data = $row = array();
-		$user   =   $this->OrdersModel->getPrintedOrderList($_POST);
+		$user   =   $this->OrdersModel->getDelivered($_POST);
 		$i = $_POST['start'];
 		foreach($user as $vend){
 
@@ -305,8 +305,8 @@ public function viewOrders($order_id){
 
 		$output = array(
 			"draw" => $_POST['draw'],
-			"recordsTotal" => $this->OrdersModel->getPrintedOrderList($_POST,"filter"),
-			"recordsFiltered" => $this->OrdersModel->getPrintedOrderList($_POST,"filter"),
+			"recordsTotal" => $this->OrdersModel->getDelivered($_POST,"filter"),
+			"recordsFiltered" => $this->OrdersModel->getDelivered($_POST,"filter"),
 			"data" => $data,
 		);
 		echo json_encode($output);

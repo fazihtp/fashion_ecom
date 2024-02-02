@@ -299,9 +299,9 @@ function ChangeToProcessed($order_id){
     $this->db->update('tbl_orders',$data);
     return true;
 }
-function ChangeToPrint($order_id){
+function ChangeToDeliver($order_id){
     $data=array(
-          'order_status'=>'Print',
+          'order_status'=>'Delivered',
         );
     $this->db->where('id',$order_id);
     $this->db->update('tbl_orders',$data);
@@ -320,7 +320,7 @@ function changeToOrders($order_id){
     
 
   
-function getPrintedOrderList($post_data,$filter="")
+function getDelivered($post_data,$filter="")
     { 
                     $column_search  =   array('t1.id','od_from.name','od_to.name','t1.total_amount','t1.order_status');
                 $column_order   =   array(null,null,'t1.id','od_from.name','od_to.name','t1.total_amount', 't1.order_status',null);
@@ -362,7 +362,7 @@ function getPrintedOrderList($post_data,$filter="")
             $this->db->join('tbl_order_address od_to', 'od_to.order_id = t1.id','LEFT');
             $this->db->join('tbl_member_details t2', 't2.id = t1.user_id','LEFT');
             // $this->db->where('t1.payment_status','PAID');
-            $this->db->where('t1.order_status','Print');
+            $this->db->where('t1.order_status','Delivered');
             $this->db->order_by('t1.id', "DESC");
             if($filter == "filter")
                 {

@@ -199,13 +199,7 @@ h3 {
                                                             <?php echo isset($order_list->order_id  ) ? $order_list->order_id : ''; ?></div>
                                                         <div class="my-2"><span class="text-600 text-90">Issue Date :
                                                          </span> <?php echo isset($order_list->created_at) ? date('F d, Y', strtotime($order_list->created_at)) : 'N/A'; ?></div>
-                                                       <div class="my-2" onclick="copyTrackingId()">
-  <span class="text-600 text-90" onclick="copyTrackingId()">Tracking ID:</span>
-  <span id="trackingId" onclick="copyTrackingId()"><?php echo isset($order_list->tracking_id) ? $order_list->tracking_id : 'Not Dispatched'; ?></span>
- <button onclick="copyTrackingId()"><i class="fa-solid fa-copy"></i></button>
-
-
-</div>
+                                                       
 
                                                     </div>
                                                 </div>
@@ -246,41 +240,7 @@ h3 {
 
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    <div class="my-2">
-                                                        <span class="text-sm text-grey-m2 align-middle">To : </span>
-                                                        <span class="text-600 text-110 text-blue align-middle"><?php echo isset($order_list->to_name) ? $order_list->to_name : 'N/A'; ?></span>
-                                                    </div>
-                                                    <div class="text-grey-m2">
-                                                        <div class="my-2">
-                                                           <?php echo isset($order_list->to_house_name) ? $order_list->to_house_name : ''; ?>
-                                                        </div>
-                                                        <div class="my-2">
-                                                           <?php echo isset($order_list->to_street_name) ? $order_list->to_street_name : ''; ?>
-                                                        </div>
-                                                        <div class="my-2">
-                                                           <?php echo isset($order_list->to_post_address) ? $order_list->to_post_address : ''; ?>
-                                                        </div>
-                                                        <div class="my-2">
-                                                           <?php echo isset($order_list->to_pin) ? $order_list->to_pin : ''; ?>
-                                                        </div>
-                                                        <div class="my-2">
-                                                          <?php echo isset($order_list->to_district) ? $order_list->to_district : ''; ?>
-                                                        </div>
-                                                        <div class="my-2">
-                                                           <?php echo isset($order_list->to_state) ? $order_list->to_state : ''; ?>
-                                                        </div>
-                                                        <div class="my-2"> 
-                                                           <?php echo isset($order_list->to_country) ? $order_list->to_country : ''; ?>
-                                                        </div>
-                                                        <div class="my-2"><b class="text-600">Phone : </b> <?php echo isset($order_list->to_phone) ? $order_list->to_phone : ''; ?>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- /.col -->
-
-                                                <div
-                                                    class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
-                                                    <hr class="d-sm-none" />
+                                                   
                                                     <div class="text-grey-m2">
 
                                                         <div class="my-2"> <span class="text-sm text-grey-m2 align-middle">From : </span>
@@ -312,6 +272,13 @@ h3 {
                                                     </div>
                                                 </div>
                                                 <!-- /.col -->
+
+                                                <div
+                                                    class="text-95 col-sm-6 align-self-start d-sm-flex justify-content-end">
+                                                    <hr class="d-sm-none" />
+                                                    
+                                                </div>
+                                                <!-- /.col -->
                                             </div>
 
                                             <div class="mt-4">
@@ -321,7 +288,7 @@ h3 {
                                                         <table class="table ec-table">
                                                             <thead>
                                                                 <tr>
-                                                                    <th scope="col">SKU</th>
+                                                                    <!-- <th scope="col">SKU</th> -->
                                                                     <th scope="col">Product</th>
                                                                     <!--<th scope="col">SKU</th>-->
                                                                     <th scope="col">Qty</th>
@@ -331,9 +298,8 @@ h3 {
                                                             <tbody>
                                                                  <?php foreach ($product_list as $order): ?>
                                                                 <tr>
-                                                                    <th><span><?php echo $order->sku_code?></span></th>
                                                                     <td><a href="<?php echo base_url(); ?>Category/view_products/<?php echo base64_encode($order->product_id) ?>"> <?php echo $order->product_name?>
-                                                 <p>(<?php echo $order->colors?>, <?php echo $order->size?>)</p>
+                                               
                                                     </a></td>
                                                                    <td><span><?php echo $order->quantity?></span></td>
                                                                      <td data-label="" class="ec-cart-pro-subtotal">

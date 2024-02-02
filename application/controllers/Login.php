@@ -24,8 +24,8 @@ class Login extends CI_Controller {
 			// print_r("yes");die;
 			redirect(base_url() .'Admin/approved_list');
 		}else{
-			print_r("No");die;
-			$this->session->set_flashdata('error','Email or Password Incorrect');
+			
+			$this->session->set_flashdata('flashError','Email or Password Incorrect');
 			redirect(base_url() . 'login');
 		}
     }

@@ -165,7 +165,7 @@ h3 {
 									    <tr>
                                             <th scope="col">Order Id</th>
                                             <th scope="col">Date</th>
-                                            <th scope="col">Shipping Charge</th>
+                                            <!-- <th scope="col">Shipping Charge</th> -->
                                             <th scope="col">Product Amount</th>
                                             <th scope="col">Status</th>
                                             <th scope="col"></th>
@@ -179,7 +179,7 @@ h3 {
                                                         <span class="amount"><?php echo date('d-m-Y h:i A', strtotime($order->created_at)); ?></span>
                                                     </td>
                                                     <td data-label="Product Amount" class="ec-cart-pro-subtotal">₹ <?php echo $order->total_amount?></td>
-                                                    <td data-label="Shipping Charge" class="ec-cart-pro-subtotal">₹ <?php echo $order->shipping_amount?></td>
+                                                    <!-- <td data-label="Shipping Charge" class="ec-cart-pro-subtotal">₹ <?php echo $order->shipping_amount?></td> -->
                                                     <td data-label="Status" class="ec-cart-pro-subtotal"><?php echo $order->order_status?></td>
                                                     <td data-label="" class="ec-cart-pro-subtotal">
                                                          <span class="tbl-btn"><a class="btn btn-lg btn-primary" href="<?php echo base_url();?>User/my_order/<?php echo  base64_encode($order->id) ?>">View</a></span>

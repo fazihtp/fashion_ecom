@@ -116,7 +116,7 @@
                         </button>
                       </div>
                       <div class="modal-body p-5 text-center">
-                        <form method="post" action="<?php echo base_url(); ?>Orders/ChangeToPrint" >
+                        <form method="post" action="<?php echo base_url(); ?>Orders/ChangeToDeliver" >
                          <!--<div class="icon-box">-->
                 		<i class="fa fa-check" style="font-weight: 1000;height: -30px;font-size: 58px;color: #32CD32;}"></i>
                 				<!--</div>	-->

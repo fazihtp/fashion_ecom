@@ -350,16 +350,18 @@ public function get_products_by_offset($offset, $id, $minPrice, $maxPrice, $sort
 
     $limit = ' LIMIT 12 OFFSET ' . $offset;
 
-    $sql = "SELECT tbl_products.*, tbl_products_gallery.image
-            FROM tbl_products
-            JOIN tbl_products_gallery ON tbl_products_gallery.product_id = tbl_products.id
-            WHERE tbl_products.status = 'Active' AND tbl_products.is_deleted = 'N' AND tbl_products.category_id=  '$id'  GROUP BY tbl_products.id";
+    $sql = "SELECT tbl_products.*, MIN(tbl_products_gallery.image) AS image
+    FROM tbl_products
+    LEFT JOIN tbl_products_gallery ON tbl_products_gallery.product_id = tbl_products.id
+    WHERE tbl_products.status = 'Active' AND tbl_products.is_deleted = 'N' AND tbl_products.category_id= '$id' ";
 
-    if (!empty($conditions)) {
-        $sql .= ' AND ' . implode(' AND ', $conditions);
-    }
+if (!empty($conditions)) {
+$sql .= ' AND ' . implode(' AND ', $conditions);
+}
 
-    $sql .= ' ORDER BY ' . $orderBy . $limit;
+$sql .= ' GROUP BY tbl_products.id';
+$sql .= ' ORDER BY ' . $orderBy . $limit;
+
 
     $query = $this->db->query($sql);
     return $query->result();

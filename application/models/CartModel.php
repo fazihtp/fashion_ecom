@@ -214,11 +214,10 @@ public function getUserOrders($user_id) {
 }
 
 public function getUserProductList($order_id){
-      $this->db->select('tbl_orders.id as order_id,tbl_orders.user_id,tbl_orders.order_status,tbl_order_products.product_id,tbl_order_products.quantity,tbl_products.product_name,tbl_products.sku_code,tbl_products_gallery.image,tbl_order_products.id,tbl_orders.total_amount,tbl_orders.order_status,tbl_orders.created_at,tbl_order_products.colour_id,tbl_order_products.size_id,tbl_colours.id,tbl_colours.colors,tbl_size.id,tbl_size.size');
+      $this->db->select('tbl_orders.id as order_id,tbl_orders.user_id,tbl_orders.order_status,tbl_order_products.product_id,tbl_order_products.quantity,tbl_products.product_name,tbl_products_gallery.image,tbl_order_products.id,tbl_orders.total_amount,tbl_orders.order_status,tbl_orders.created_at');
       $this->db->from('tbl_order_products');
        $this->db->join('tbl_orders','tbl_orders.id = tbl_order_products.order_id');
-       $this->db->join('tbl_colours','tbl_colours.id = tbl_order_products.colour_id');
-        $this->db->join('tbl_size','tbl_size.id = tbl_order_products.size_id');
+      
       	$this->db->join('tbl_products', 'tbl_products.id = tbl_order_products.product_id');
       	$this->db->join('tbl_products_gallery ', 'tbl_products_gallery.product_id = tbl_order_products.product_id');
 		$this->db->where('tbl_orders.id', $order_id);
@@ -240,7 +239,7 @@ public function getUserProductList($order_id){
 //         $result = $query->result();
 //         return $result;
 // }
-public function getUserDetails($order_id){
+public function getUserDetails1($order_id){
     $this->db->select('
         t1.id AS order_id,
         t1.user_id,
@@ -275,6 +274,36 @@ public function getUserDetails($order_id){
     $this->db->join('tbl_order_address add_to', 'add_to.order_id = t1.id AND add_to.status = "TO"');
     $this->db->join('tbl_states d1', 'add_from.state = d1.state_id', 'left');
     $this->db->join('tbl_states d2', 'add_to.state = d2.state_id', 'left');
+    $this->db->where('t1.id', $order_id);
+    // $this->db->where('t1.order_status', 'Order Placed');
+    // $this->db->where('t1.payment_status', 'PAID');
+    $query = $this->db->get();
+    $result = $query->row();
+    return $result;
+}
+public function getUserDetails($order_id){
+    $this->db->select('
+        t1.id AS order_id,
+        t1.user_id,
+        t1.shipping_method,
+        t1.created_at,
+        t1.tracking_id,
+        add_from.name AS from_name,
+        add_from.phone_number AS from_phone,
+        add_from.email_id AS from_mail_id,
+        add_from.house_name AS from_house_name,
+        add_from.street_name AS from_street_name,
+        add_from.post_address AS from_post_address,
+        add_from.pin_code AS from_pin,
+         d1.state_title AS from_state,
+        add_from.district AS from_district'
+        
+        
+       
+    );
+    $this->db->from('tbl_orders t1');
+    $this->db->join('tbl_order_address add_from', 'add_from.order_id = t1.id ');
+    $this->db->join('tbl_states d1', 'add_from.state = d1.state_id', 'left');
     $this->db->where('t1.id', $order_id);
     // $this->db->where('t1.order_status', 'Order Placed');
     // $this->db->where('t1.payment_status', 'PAID');

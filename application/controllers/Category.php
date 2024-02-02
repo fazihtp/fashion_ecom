@@ -20,7 +20,7 @@ public function product_view($cat_id) {
     // $data['category'] = $this->CategoryModel->getSubCategories($id);
     $data['products'] = $this->CategoryModel->getProductsPaginated($id);
     $data['catid'] = $id;
-
+    //  print_r($data['products'] );die;
     $this->load->view('home_pages/view_products1', $data);
 }
 
@@ -43,6 +43,7 @@ public function product_view($cat_id) {
         $maxPrice = $this->input->get('maxPrice');
         $sortOption = $this->input->get('sortOption');
         $products = $this->CategoryModel->get_products_by_offset($offset, $category_id, $minPrice, $maxPrice, $sortOption);
+        // print_r($this->db->last_query());die;
         $data['products'] = $products;
         $html = $this->load->view('home_pages/product_html_view', $data, true);
         echo $html;

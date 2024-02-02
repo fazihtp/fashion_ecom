@@ -183,10 +183,9 @@
 																			<th style="width: 10px;">ID</th>
 																			<th>Product_Name</th>
 																			<th>From Address</th>
-																			<th>To Address</th>
+																			<!-- <th>To Address</th> -->
 																			<th>Status</th>
 																			<th>Date&Time</th>
-																			<th></th>
 																		</tr>
 																	</thead>
 
@@ -201,10 +200,10 @@
                                                                     <div class="media-body pr-3">
                                                                       <a class="mt-0 mb-1 font-size-15 text-dark" target="_blank" href="<?php echo base_url();?>Products/view_product/<?php echo base64_encode($order->product_id)?>"><?php echo $order->product_name?>
 
-                                                                        <p><?php echo $order->colors?>, <?php echo $order->size?></p></a>
+                                                                       
                                                                     </div>
                                                                     
-                                                                        <?php $address = get_order_list($order->order_id); ?>
+                                                                        <?php $address = get_order_list1($order->order_id); ?>
 
                                                             <?php if ($address->from_name || $address->from_phone || $address->from_house_name || $address->from_pin || $address->from_state): ?>
                                                             <div class="media-body pr-3">
@@ -216,15 +215,7 @@
                                                             </div>
                                                             <?php endif; ?>
                                                             
-                                                            <?php if ($address->to_name || $address->to_phone || $address->to_house_name || $address->to_pin || $address->to_state): ?>
-                                                            <div class="media-body pr-3">
-                                                                <a class="mt-0 mb-1 font-size-15 text-dark" target="_blank" href="<?php echo base_url();?>Orders/viewOrders/<?php echo $order->order_id;?>">
-                                                                    <?php echo $address->to_name ?>
-                                                                    <p><?php echo $address->to_phone ?>, <?php echo $address->to_house_name ?></p>
-                                                                    <p><?php echo $address->to_pin ?>, <?php echo $address->to_state ?></p>
-                                                                </a>
-                                                            </div>
-                                                            <?php endif; ?>
+                                                           
 
                                                                      <div class="media-body pr-3">
                                                                         <a  target="_blank" href="<?php echo base_url();?>Orders/viewOrders/<?php echo $order->order_id;?>">
@@ -232,7 +223,7 @@
                                                                     </div>
                                                                     
                                                      
-                                                          <span class="font-size-12 d-inline-block"><i class=""></i><?php echo date('Y-m-d h:i:s a', strtotime($order->created_at)); ?></span>
+                                                          <span class="font-size-12"><i class=""></i><?php echo date('Y-m-d h:i:s a', strtotime($order->created_at)); ?></span>
                                                                 </div>
                                                                 
                                                                  <?php endforeach; ?>

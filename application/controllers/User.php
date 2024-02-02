@@ -114,10 +114,7 @@ class User extends CI_Controller {
       
       $user_id = $this->session->userdata('user_id');
       $data['orders']    =$this->CartModel->getUserOrders($user_id);
-    //   print_r($data['orders']);die;
-    //   $data['orders']    =$this->CartModel->getorderProducts($user_id);
-    //   print_r($this->db->last_query());die;
-	  
+      
      $this->load->view('user/my_orders',$data);
      } else {
          

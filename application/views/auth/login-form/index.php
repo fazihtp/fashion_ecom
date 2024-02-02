@@ -65,4 +65,36 @@
 
 	</body>
 </html>
+<script src="<?php echo base_url(); ?>assets/js/vendor/index.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/main.js"></script>
+    <script src="<?php echo base_url(); ?>assets/sweet-alert/sweetalert.min.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        <?php
+        if ($this->session->flashdata('flashError')) {
+            ?>
+                    swal({
+                        title: "Error",
+                        text: "<?php echo $this->session->flashdata('flashError') ?>",
+                        icon: "error",
+                        button: "OK",
+                    });
+            <?php
+        }
+        ?>
+        <?php
+        if ($this->session->flashdata('flashSuccess')) {
+            ?>
+                    swal({
+                        title: "Success",
+                        text: "<?php echo $this->session->flashdata('flashSuccess') ?>",
+                        icon: "success",
+                        button: "OK",
+                    });
+            <?php 
+        } 
+        ?>
+    });
+</script>

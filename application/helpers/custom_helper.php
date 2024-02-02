@@ -175,6 +175,17 @@ function getOrderDispatchedDetails(){
 	$query = $ci->db->get('tbl_orders');
     return $query->num_rows();
 }
+
+function getOrderDeliveredDetails(){
+	$ci = &get_instance();
+	$ci->load->database();
+	$ci->db->where('order_status','Delivered');
+	$ci->db->where('payment_status','PAID');
+	$query = $ci->db->get('tbl_orders');
+    return $query->num_rows();
+}
+
+
 function getRefundOrderDetails(){
 	$ci = &get_instance();
 	$ci->load->database();
@@ -224,6 +235,35 @@ function getCartStock($product_id,$size_id,$colour_id){
 	$ci->db->where('size',$size_id);
 	$query = $ci->db->get('tbl_product_variants');
 	return $result = $query->row();
+}
+function get_order_list1($order_id){
+    $ci = &get_instance();
+	$ci->load->database();
+    $ci->db->select('
+        t1.id AS order_id,
+        t1.user_id,
+        t1.shipping_method,
+        t1.created_at,
+        add_from.id AS from_id,
+        add_from.name AS from_name,
+        add_from.phone_number AS from_phone,
+        add_from.email_id AS from_mail_id,
+        add_from.house_name AS from_house_name,
+        add_from.street_name AS from_street_name,
+        add_from.post_address AS from_post_address,
+        add_from.pin_code AS from_pin,
+        d1.state_title AS from_state,
+        add_from.district AS from_district'
+       
+       
+    );
+    $ci->db->from('tbl_orders t1');
+    $ci->db->join('tbl_order_address add_from', 'add_from.order_id = t1.id ');
+    $ci->db->join('tbl_states d1', 'add_from.state = d1.state_id', 'left');
+    $ci->db->where('t1.id', $order_id);
+    $query = $ci->db->get();
+    $result = $query->row();
+    return $result;
 }
 function get_order_list($order_id){
     $ci = &get_instance();

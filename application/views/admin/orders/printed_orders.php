@@ -184,7 +184,7 @@ $(document).ready(function() {
         'serverMethod': 'post',
         'scrollY': '100%',
         'ajax': {
-            'url': '<?=base_url()?>Orders/getPrintedOrderList',
+            'url': '<?=base_url()?>Orders/getDelivered',
             'type': 'POST',
             'data': function(d) {
                 	d.from_date= $("#from_date").val()
