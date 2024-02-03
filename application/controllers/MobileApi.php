@@ -36,7 +36,7 @@ class MobileApi extends CI_Controller
         // 			$expire     = $issuedAt->modify('+10000000 minutes')->getTimestamp();
                     //  $expire = null;
                      $expire = "";
-        			$serverName = "https://hakcollections.com/";
+        			$serverName = "http://localhost/fashion_Store/";
         			$user_id   	= $user->user_id;
         			$user_name  = $user->member_name;
         			$token =[
@@ -79,7 +79,7 @@ class MobileApi extends CI_Controller
 			$tokenId    = base64_encode(random_bytes(16));
 			$issuedAt   = new DateTimeImmutable();
 			$expire     = $issuedAt->modify('+10000000 minutes')->getTimestamp();
-			$serverName = "https://hakcollections.com/";
+			$serverName = "http://localhost/fashion_Store/";
 			$user_id   	= $user->user_id;
 			$user_name  = $user->member_name;
 			$token =[
